@@ -4,7 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -26,7 +26,7 @@ metadata:
     "app.kubernetes.io/component": "jenkins-master"
 type: Opaque
 data:
-  jenkins-admin-password: "eWhlS3NLYloxcQ=="
+  jenkins-admin-password: "VjRKQmw1b3hXbQ=="
   jenkins-admin-user: "YWRtaW4="
 ---
 # Source: jenkins/templates/config.yaml
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -71,7 +71,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: RELEASE-NAME-jenkins-jenkins-jcasc-config
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": jenkins-2.5.2
@@ -105,7 +105,7 @@ data:
           jenkinsTunnel: "RELEASE-NAME-jenkins-agent:50000"
           maxRequestsPerHostStr: "32"
           name: "kubernetes"
-          namespace: "ci"
+          namespace: "default"
           serverUrl: "https://kubernetes.default"
           podLabels:
           - key: "jenkins/RELEASE-NAME-jenkins-slave"
@@ -119,7 +119,7 @@ data:
                 envVars:
                   - envVar:
                       key: "JENKINS_URL"
-                      value: "http://RELEASE-NAME-jenkins.ci.svc.cluster.local:8080"
+                      value: "http://RELEASE-NAME-jenkins.default.svc.cluster.local:8080"
                 image: "jenkins/inbound-agent:4.3-4"
                 privileged: "false"
                 resourceLimitCpu: 512m
@@ -157,7 +157,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: RELEASE-NAME-jenkins-tests
-  namespace: ci
+  namespace: default
 data:
   run.sh: |-
     @test "Testing Jenkins UI is accessible" {
@@ -169,7 +169,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -189,7 +189,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: RELEASE-NAME-jenkins-schedule-agents
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -211,7 +211,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: RELEASE-NAME-jenkins-casc-reload
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -230,7 +230,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: RELEASE-NAME-jenkins-schedule-agents
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -244,14 +244,14 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
 ---
 # Source: jenkins/templates/rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: RELEASE-NAME-jenkins-watch-configmaps
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -265,14 +265,14 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
 ---
 # Source: jenkins/templates/jenkins-agent-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: RELEASE-NAME-jenkins-agent
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -295,7 +295,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -317,7 +317,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: RELEASE-NAME-jenkins
-  namespace: ci
+  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-2.5.2"
@@ -341,7 +341,7 @@ spec:
         "app.kubernetes.io/instance": "RELEASE-NAME"
         "app.kubernetes.io/component": "jenkins-master"
       annotations:
-        checksum/config: 3019bd940f71a1c4c51686441b8b1b0826bb56ec7818c43c611772ad77bf73bd
+        checksum/config: 643e4b5195b7128416bb7da09b6b6e9171e26b4bfc44cd47c76209f943132244
     spec:
       securityContext:
         runAsUser: 1000
@@ -472,7 +472,7 @@ spec:
             - name: FOLDER
               value: "/var/jenkins_home/casc_configs"
             - name: NAMESPACE
-              value: "ci"
+              value: "default"
             - name: REQ_URL
               value: "http://localhost:8080/reload-configuration-as-code/?casc-reload-token=$(POD_NAME)"
             - name: REQ_METHOD
@@ -509,8 +509,8 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "RELEASE-NAME-ui-test-zyo0x"
-  namespace: ci
+  name: "RELEASE-NAME-ui-test-c0ael"
+  namespace: default
   annotations:
     "helm.sh/hook": test-success
 spec:
