@@ -1,7 +1,7 @@
 ---
-# Source: jenkins/templates/service-account.yaml
+# Source: jenkins/templates/home-pvc.yaml
+kind: PersistentVolumeClaim
 apiVersion: v1
-kind: ServiceAccount
 metadata:
   name: RELEASE-NAME-jenkins
   namespace: default
@@ -11,3 +11,10 @@ metadata:
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "RELEASE-NAME"
     "app.kubernetes.io/component": "jenkins-master"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"
+      
