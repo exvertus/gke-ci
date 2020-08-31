@@ -5,20 +5,20 @@
 
 When this was run, it also spit out the test Pod to stdout:
 ```
-`helm template base --output-dir git/gke-ci/bases/helm-fetch-template/ charts/jenkins`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/service-account.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/secret.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/config.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jcasc-config.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/tests/test-config.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/home-pvc.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-agent-svc.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-svc.yaml`
-`wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-deployment.yaml`
+helm template base --output-dir git/gke-ci/bases/helm-fetch-template/ charts/jenkins
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/service-account.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/secret.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/config.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jcasc-config.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/tests/test-config.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/home-pvc.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/rbac.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-agent-svc.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-svc.yaml
+wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-deployment.yaml
 ---
 /# Source: jenkins/templates/tests/jenkins-test.yaml
 apiVersion: v1
