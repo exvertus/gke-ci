@@ -4,8 +4,7 @@
 * `helm template base --output-dir git/gke-ci/bases/helm-fetch-template/ [CHART_FOLDER]/jenkins`
 
 When this was run, it also spit out the test Pod to stdout:
-
-
+```
 `helm template base --output-dir git/gke-ci/bases/helm-fetch-template/ charts/jenkins`
 `wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/service-account.yaml`
 `wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/secret.yaml`
@@ -21,7 +20,6 @@ When this was run, it also spit out the test Pod to stdout:
 `wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-svc.yaml`
 `wrote git/gke-ci/bases/helm-fetch-template//jenkins/templates/jenkins-master-deployment.yaml`
 ---
-```
 /# Source: jenkins/templates/tests/jenkins-test.yaml
 apiVersion: v1
 kind: Pod
